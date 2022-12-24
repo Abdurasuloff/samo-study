@@ -1,0 +1,18 @@
+{% extends 'boss/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Kursni tahrirlash
+{% endblock title %}
+{% block content %}
+      <div class="container"><br>
+            {% if request.user.is_staff == True %}
+            <h5>Kursni tahrirlash </h5>
+            <form  method="post">{% csrf_token %}
+                  {{ form|crispy }}
+                  <br>
+                  <button type="submit" class="btn btn-primary" > Tahrirlash </button>
+                  <a href="{% url 'index' %}"  class="btn btn-danger"> Ortga qaytish </a>
+            </form>
+            {% endif %}
+            </div>
+{% endblock content %}

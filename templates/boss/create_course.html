@@ -1,0 +1,18 @@
+{% extends 'boss/base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+Kurs ochish
+{% endblock title %}
+{% block content %}
+      <div class="container"><br>
+            <h5>Kurs ochish </h5>
+            {% if request.user.is_staff == True %}
+            <form  method="post">{% csrf_token %}
+                  {{ form|crispy }}
+                  <br>
+                  <button type="submit" class="btn btn-primary" > Yaratish </button>
+                  <a href="{% url 'index' %}"  class="btn btn-danger"> Ortga qaytish </a>
+            </form>
+            {% endif %}
+      </div>
+{% endblock content %}

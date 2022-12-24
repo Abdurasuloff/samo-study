@@ -1,0 +1,54 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Ma'lumotlarni o'zgartirish</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+<body>
+      <div class="container"><br>
+            <h5>Ma'lumotlarni o'zgartirish </h5>
+<form  method="post">{% csrf_token %}
+      <!-- First Name Input -->
+      <div id="div_id_old_password" class="form-group"> 
+            <label for="id_old_password" class=" requiredField">First Name </label> 
+            <div> 
+                  <input type="text" value="{{user.first_name}}" name="first_name"autofocus class="textinput textInput form-control" required id="id_old_password"> 
+            </div>
+            <br>
+      </div> 
+      <!-- Last Name Input -->
+      <div id="div_id_old_password" class="form-group"> 
+            <label for="id_old_password" class=" requiredField">Last Name </label> 
+            <div> 
+                  <input type="text" value="{{user.last_name}}" name="last_name"autofocus class="textinput textInput form-control" required id="id_old_password"> 
+            </div>
+            <br>
+      </div>
+      <div id="div_id_old_password" class="form-group"> 
+            <label for="id_old_password" class=" requiredField">Username </label> 
+            <div> 
+                  <input type="text" value="{{user.username}}" name="username"autofocus class="textinput textInput form-control" required id="id_old_password"> 
+            </div>
+            <br>
+      </div>
+      <div id="div_id_old_password" class="form-group"> 
+            <label for="id_old_password" class=" requiredField">Email</label> 
+            <div> 
+                  <input type="text" value="{{user.email}}" name="email"autofocus class="textinput textInput form-control" required id="id_old_password"> 
+            </div>
+            <br>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary" > O'zgartirish </button>
+      <a href="/"  class="btn btn-danger"> Ortga qaytish </a>
+      </form>
+</div>
+<br><br>
+            <footer> <center><p class="text-muted" >Abdurasulov Codes</p></center> </footer>
+</body>
+</html>

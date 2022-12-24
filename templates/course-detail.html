@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+ 
+ table .red{
+      background-color: rgba(247, 30, 30, 0.397);
+}
+table .yellow{
+      background-color: rgba(221, 235, 23, 0.486);
+}
+
+</style>
+<div class="row">
+      <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18">Kurs haqida</h4>
+  
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="{% url 'teacher-dashboard' %}">Dashboard</a></li>
+                      <li class="breadcrumb-item active">Kurs haqida. </li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+    </div>
+<div class="row">
+      <div class="col-10">  <h5>{{course.name}}</h5></div>
+      <div class="col-2">
+            <form  method="post"> {% csrf_token %} 
+                  {% if have_a_class %}
+                  <button class="btn btn-primary" type="submit"> Davomat olish</button>
+                  {% else %}
+                  <button class="btn btn-primary disabled" type="disabled"> Davomat olish </button>
+                  {% endif %}
+            </form>
+      </div>
+</div>
+<br>
+<div class="">
+      <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"> O'quvchilar ro'yxati</h4>
+                    </div>
+                    <div class="card-body">
+      <table  id="datatable" class="table table-bordered dt-responsive  nowrap w-100">
+            <thead>
+                  <tr>
+                    <th style="width: 3%;"   scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    <th>Balans</th>
+                    {% for i in students %}
+                    
+                       {% if forloop.counter < 2 %}
+                       {{i.attendances.date}}
+                       {% for a  in i.attendances %}
+                      <td class="vertical" style="width: 3%;" >{{a.date}}</td>
+                      {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+
+                    
+                  </tr>
+                </thead>
+           
+                  <tbody>
+                  {% for i in course.students.all %}
+                  {% if i.wallet < 0 %}
+                  <tr class="yellow" >
+                        <th class="yellow" style="width: 3%;"  scope="row">{{forloop.counter}}</th>
+                        <td class="yellow" >{{i.full_name}}</td>
+                        <td class="yellow" style="width: 3%;"  >{{i.wallet}}</td>
+                    </tr>
+                  {% elif i.wallet < -100000   %}
+                  <tr class="red" >
+                      <th class="red" style="width: 3%;"  scope="row">{{forloop.counter}}</th>
+                      <td class="red" >{{i.full_name}}</td>
+                      <td class="red" style="width: 3%;"  >{{i.wallet}}</td>
+                  </tr>
+                  {% else %} 
+                  <tr>
+                        <th style="width: 3%;"  scope="row">{{forloop.counter}}</th>
+                        <td>{{i.full_name}}</td>
+                        <td style="width: 3%;" >{{i.wallet}}</td>
+                    </tr> 
+                    {% endif %}
+                    {% endfor %}
+                  </tbody>
+                 
+      </table>
+
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}

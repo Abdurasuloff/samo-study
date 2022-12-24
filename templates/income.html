@@ -1,0 +1,206 @@
+{% extends 'boss/base.html' %}
+{% block content %}
+
+<div class="row">
+      <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18">Bugungi kirim </h4>
+  
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><a href=""></a></li>
+                      <li class="breadcrumb-item active"></li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+   
+
+
+   
+      <div class="col-xl-3 col-md-6">
+          <!-- card -->
+          <div class="card card-h-100">
+              <!-- card body -->
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col-12">
+                          <span class="text-muted mb-3 lh-1 d-block text-truncate">Bugungi kirim</span>
+                          <p class="mb-3">
+                              <div class="row">
+                                    <div class="col-5">
+                                          <p>Umumiy kirim: </p>
+                                          <p>Kutilgan kirim:</p>
+                                         
+                                    </div>
+                                    <div class="col-5">
+                                          <p>{{todays_income.total_income}} so'm</p>
+                                          <p>{{todays_income.expected_income}} so'm</p>
+                                         
+                                    </div>
+                              </div>
+                        </p>
+                      </div>
+  
+                     
+                  </div>
+                  
+              </div><!-- end card body -->
+          </div><!-- end card -->
+      </div><!-- end col -->
+      <div class="col-xl-3 col-md-6">
+            <!-- card -->
+            <div class="card card-h-100">
+                <!-- card body -->
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Oraliqdagi kirim</span>
+                            <p class="mb-3">
+                                <div class="row">
+                                      <div class="col-5">
+                                            <p>Umumiy kirim: </p>
+                                            <p>Kutilgan kirim:</p>
+                                           
+                                      </div>
+                                      <div class="col-5">
+                                          <p>{{incomes_between_dates.total_income}} so'm</p>
+                                          <p>{{incomes_between_dates.expected_income}} so'm</p>
+                                           
+                                      </div>
+                                </div>
+                          </p>
+                        </div>
+    
+                       
+                    </div>
+                    
+                </div><!-- end card body -->
+            </div><!-- end card -->
+        </div><!-- end col -->
+  
+      
+  
+     
+      <div class="col-xl-6 col-md-6">
+          <!-- card -->
+          <div class="card card-h-100">
+              <!-- card body -->
+              <div class="card-body">
+                  <div class="row align-items-center">
+                      <div class="col-12">
+                          <span class="text-muted mb-3 lh-1 d-block text-truncate">Oraliqni o'zgartirish</span>
+                          <form method="post"  >{% csrf_token %}
+                            
+                              <div class="row" >
+                                <div class="col-5" >
+                                  <label for="example-date-input" class="form-label">Boshlanish</label>
+                                  <input class="form-control" name="start" type="date" value="{{start}}" id="example-date-input">
+                                </div>
+                                <div class="col-5" >
+                                  <label for="example-date-input" class="form-label">Tugash</label>
+                                  <input class="form-control" name="end" type="date" value="{{end}}" id="example-date-input">
+                                </div>
+                                <div class="col-2" ><button style='margin-top:27px' type="submit" class="btn btn-primary" >Submit</button></div>
+  
+                              </div>
+                        
+                           
+                       
+                            
+                          </form>
+                          
+                      </div>
+                     
+                  </div>
+                 
+              </div><!-- end card body -->
+          </div><!-- end card -->
+      </div><!-- end col -->    
+  </div><!-- end row-->
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Bugungi kirimlar</h4>
+                  
+              </div>
+              <div class="card-body">
+                  <table  class="table table-bordered dt-responsive nowrap w-100">
+                      <thead>
+                          <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">O'quvchining to'liq ismi</th>
+                              <th scope="col">To'lov summasi</th>
+                              <th scope="col">Sana</th>
+                              <th scope="col">Qabul qiluvchi</th>
+                              
+                              
+                            </tr>
+                      </thead>
+
+
+                      <tbody>
+                          {% for i in todays_income.payments %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{i.student.full_name}}</td>
+                            <td>{{i.summ}}</td>
+                            <td>{{i.date}}</td>
+                            <td>{{i.recepient.first_name}} {{i.recepient.last_name}}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+
+
+              
+          </div>
+          <!-- end cardaa -->
+      </div> <!-- end col -->
+  </div> <!-- end row -->
+  <div class="row">
+      <div class="col-12">
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Oraliqdagi kirimlar</h4>
+                  
+              </div>
+              <div class="card-body">
+                  <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                      <thead>
+                          <tr>
+                              <th scope="col">#</th>
+                              <th scope="col">O'quvchining to'liq ismi</th>
+                              <th scope="col">To'lov summasi</th>
+                              <th scope="col">Sana</th>
+                              <th scope="col">Qabul qiluvchi</th>
+                              
+                              
+                            </tr>
+                      </thead>
+
+
+                      <tbody>
+                          {% for i in incomes_between_dates.payments %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{i.student.full_name}}</td>
+                            <td>{{i.summ}}</td>
+                            <td>{{i.date}}</td>
+                            <td>{{i.recepient.first_name}} {{i.recepient.last_name}}</td>
+                          </tr>
+                          {% endfor %}
+                      </tbody>
+                  </table>
+              </div>
+
+
+              
+          </div>
+          <!-- end cardaa -->
+      </div> <!-- end col -->
+  </div> <!-- end row -->
+
+{% endblock content %}

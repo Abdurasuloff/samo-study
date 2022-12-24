@@ -1,0 +1,496 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+    
+<!-- Mirrored from themesbrand.com/minia/layouts/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Aug 2022 06:28:52 GMT -->
+<head>
+        
+        <meta charset="utf-8" />
+        <title>Samo Study</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+        <!-- preloader css -->
+        <link rel="stylesheet" href="{% static 'assets/css/preloader.min.css' %}" type="text/css" />
+
+        <!-- Bootstrap Css -->
+        <link href="{% static 'assets/css/bootstrap.min.css' %}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{% static 'assets/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{% static 'assets/css/app.min.css' %}" id="app-style" rel="stylesheet" type="text/css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+
+    </head>
+
+    <body>
+
+    <!-- <body data-layout="horizontal"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">
+
+            
+            <header id="page-topbar">
+                <div class="navbar-header">
+                    <div class="d-flex">
+                        <!-- LOGO -->
+
+                        
+                        <!-- App Search-->
+                        <form style="margin-left:25px" class="app-search d-none d-lg-block">
+                            <div class="position-relative">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <button class="btn btn-primary" type="button"><i class="bx bx-search-alt align-middle"></i></button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="d-flex">
+
+                        <div class="dropdown d-inline-block d-lg-none ms-2">
+                            <button type="button" class="btn header-item" id="page-header-search-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i data-feather="search" class="icon-lg"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                aria-labelledby="page-header-search-dropdown">
+        
+                                <form class="p-3">
+                                    <div class="form-group m-0">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search ..." aria-label="Search Result">
+
+                                            <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                     
+                        <div class="dropdown d-none d-sm-inline-block">
+                            <button type="button" class="btn header-item" id="mode-setting-btn">
+                                <i data-feather="moon" class="icon-lg layout-mode-dark"></i>
+                                <i data-feather="sun" class="icon-lg layout-mode-light"></i>
+                            </button>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item right-bar-toggle me-2">
+                                <i data-feather="settings" class="icon-lg"></i>
+                            </button>
+                        </div>
+
+                        <div class="dropdown d-inline-block">
+                            <button type="button" class="btn header-item bg-soft-light border-start border-end" id="page-header-user-dropdown"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle header-profile-user" src="{% static 'assets/images/users/avatar-1.jpg' %}"
+                                    alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium">{{request.user.first_name}}</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a class="dropdown-item" href="{% url 'update-profile' %}"><i class="mdi mdi-lock  align-middle me-1"></i> Edit profile</a>
+                                <a class="dropdown-item" href="{% url 'password_change' %}"><i class="mdi mdi-lock font-size-16 align-middle me-1"></i> Update password</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/accounts/logout"><i class="mdi mdi-logout font-size-16 align-middle me-1"></i> Logout</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </header>
+
+            <!-- ========== Left Sidebar Start ========== -->
+  
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+           
+            <!-- ============================================================== -->
+            <div class="main-content">
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        
+                        <!-- end page title -->
+                       <div class="row" >
+                          <div class="col-sm-4" >
+                          <div class="card"> 
+                            <div class="card-header">
+                                <h4 class="card-title">To'lov qilish</h4>
+                                <p class="card-title-desc">To'lov qilish uchun o'quvchi va summani kiriting.</p>
+                            </div>
+                            <div class="card-body">
+                              <form method="post"  action="{% url 'make-payment' %}" >{% csrf_token %} 
+                                <div  class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Student</label>
+                                      <select name="student_id"  required class="form-select" id="inputGroupSelect01">
+                                          <option >Tanlash...</option>
+                                          {% for i in students %}
+                                          <option value="{{i.id}}">{{i.full_name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                     
+                                </div>
+                                <div  class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">To'lov summasi</label>
+                                      <input required placeholder="200000" type="number" name="summ" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                                <button style="margin-top: 5px; margin-bottom: 5px;"type="submit" class="btn btn-primary">Tasdiqlash</button>
+                              </form>
+                            </div>
+                          </div>
+                          
+                        
+                       </div>
+                       <div class="col-sm-4" >
+                          <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Yangi o'quvchi</h4>
+                                <p class="card-title-desc">Yangi o'quvchini ismi familiyasi va telfon raqamini kiriting. </p>
+                            </div>
+                            <div class="card-body">
+                                <form method="post"  action="{% url 'create-student' %}" > {% csrf_token %}
+                                    <div  class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">O'quvchining to'liq ismi</label>
+                                      <input required placeholder="Ilon Musk" name="full_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    <div  class="mb-3">
+                                          <label for="exampleInputEmail1" class="form-label">Telefon raqam</label>
+                                          <input required placeholder="+998907777777" type="number" name="phone_number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    </div>
+                                    
+                                    <button style="margin-top: 5px; margin-bottom: 5px;"type="submit" class="btn btn-primary">Yaratish</button>
+                                  </form>
+                            </div>
+                          </div>
+                       </div>
+                       <div class="col-sm-4" >
+                        <div class="card">
+                          <div class="card-header">
+                              <h4 class="card-title">Kursga o'quvchi qo'shish.</h4>
+                              <p class="card-title-desc">Student va Kursni tanlang.</p>
+                          </div>
+                          <div class="card-body">
+                            <form action="{% url 'add-student-to-course' %}" method="post"   >{% csrf_token %} 
+                                <div  class="mb-3">
+                                  <label for="exampleInputEmail1" class="form-label">Student</label>
+                                  <select name="student_id"  required class="form-select" id="inputGroupSelect01">
+                                      <option value=" " >Tanlash...</option>
+                                      {% for i in students %}
+                                      <option value="{{i.id}}">{{i.full_name}}</option>
+                                      {% endfor %}
+                                    </select>
+                                 
+                                </div>
+                                <div  class="mb-3">
+                                      <label for="exampleInputEmail1" class="form-label">Kurs</label>
+                                      <select required name="course_id"  required class="form-select" id="inputGroupSelect01">
+                                          
+                                          {% for i in courses %}
+                                          <option value="{{i.id}}">{{i.name}}</option>
+                                          {% endfor %}
+                                        </select>
+                                     
+                                </div>
+                                
+                                <button style="margin-top: 5px; margin-bottom: 5px;"type="submit" class="btn btn-primary">Bajarish</button>
+                              </form>
+                          </div>
+                        </div>
+                     </div>
+                    </div> 
+                    <!-- end row -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Kurslar ro'yxati</h4>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Kurs nomi</th>
+                                                <th scope="col">Smena</th>
+                                                <th scope="col">Kunlar</th>
+                                                <th scope="col">Ustoz</th>
+                                                <th scope="col">O'quvchilar soni</th>
+                                                
+                                              </tr>
+                                        </thead>
+    
+    
+                                        <tbody>
+                                            {% for i in courses %}
+                                            <tr>
+                                              <th scope="row">{{ forloop.counter }}</th>
+                                              <td>{{i.name}}</td>
+                                              <td>{{i.time}}</td>
+                                              <td>{{i.days}}</td>
+                                              <td>{{i.teacher.first_name}} {{i.teacher.last_name}}</td>
+                                              <td>{{i.students.count}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- end cardaa -->
+                        </div> <!-- end col -->
+                    </div> <!-- end row -->
+                  
+              </div> 
+                  </div> <!-- container-fluid -->
+                </div>
+              </div>
+                <!-- End Page-content -->
+
+                
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <script>document.write(new Date().getFullYear())</script> © Abdurasulov Codes.
+                            </div>
+                            <div class="col-sm-6">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->
+
+        
+        <!-- Right Sidebar -->
+        <div class="right-bar">
+            <div data-simplebar class="h-100">
+                <div class="rightbar-title d-flex align-items-center p-3">
+
+                    <h5 class="m-0 me-2">Theme Customizer</h5>
+
+                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                        <i class="mdi mdi-close noti-icon"></i>
+                    </a>
+                </div>
+
+                <!-- Settings -->
+                <hr class="m-0" />
+
+                <div class="p-4">
+                    <h6 class="mb-3">Layout</h6>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout"
+                            id="layout-vertical" value="vertical">
+                        <label class="form-check-label" for="sslayout-svertical">Vertical</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout"
+                            id="layout-horizontal" value="hssorizontal">
+                        <label class="form-check-label" for="layout-sshorizontal">Horizontal</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Mode</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-mode"
+                            id="layout-mode-light" value="light">
+                        <label class="form-check-label" for="layout-mode-light">Light</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-mode"
+                            id="layout-mode-dark" value="dark">
+                        <label class="form-check-label" for="layout-mode-dark">Dark</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Width</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-width"
+                            id="layout-width-fuild" value="fuild" onchange="document.body.setAttribute('data-layout-size', 'fluid')">
+                        <label class="form-check-label" for="layout-width-fuild">Fluid</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-width"
+                            id="layout-width-boxed" value="boxed" onchange="document.body.setAttribute('data-layout-size', 'boxed')">
+                        <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Layout Position</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-position"
+                            id="layout-position-fixed" value="fixed" onchange="document.body.setAttribute('data-layout-scrollable', 'false')">
+                        <label class="form-check-label" for="layout-position-fixed">Fixed</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-position"
+                            id="layout-position-scrollable" value="scrollable" onchange="document.body.setAttribute('data-layout-scrollable', 'true')">
+                        <label class="form-check-label" for="layout-position-scrollable">Scrollable</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Topbar Color</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="topbar-color"
+                            id="topbar-color-light" value="light" onchange="document.body.setAttribute('data-topbar', 'light')">
+                        <label class="form-check-label" for="topbar-color-light">Light</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="topbar-color"
+                            id="topbar-color-dark" value="dark" onchange="document.body.setAttribute('data-topbar', 'dark')">
+                        <label class="form-check-label" for="topbar-color-dark">Dark</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Size</h6>
+
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                            id="sidebar-size-default" value="default" onchange="document.body.setAttribute('data-sidebar-size', 'lg')">
+                        <label class="form-check-label" for="sidebar-size-default">Default</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                            id="sidebar-size-compact" value="compact" onchange="document.body.setAttribute('data-sidebar-size', 'md')">
+                        <label class="form-check-label" for="sidebar-size-compact">Compact</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-size"
+                            id="sidebar-size-small" value="small" onchange="document.body.setAttribute('data-sidebar-size', 'sm')">
+                        <label class="form-check-label" for="sidebar-size-small">Small (Icon View)</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2 sidebar-setting">Sidebar Color</h6>
+
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                            id="sidebar-color-light" value="light" onchange="document.body.setAttribute('data-sidebar', 'light')">
+                        <label class="form-check-label" for="sidebar-color-light">Light</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                            id="sidebar-color-dark" value="dark" onchange="document.body.setAttribute('data-sidebar', 'dark')">
+                        <label class="form-check-label" for="sidebar-color-dark">Dark</label>
+                    </div>
+                    <div class="form-check sidebar-setting">
+                        <input class="form-check-input" type="radio" name="sidebar-color"
+                            id="sidebar-color-brand" value="brand" onchange="document.body.setAttribute('data-sidebar', 'brand')">
+                        <label class="form-check-label" for="sidebar-color-brand">Brand</label>
+                    </div>
+
+                    <h6 class="mt-4 mb-3 pt-2">Direction</h6>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-direction"
+                            id="layout-direction-ltr" value="ltr">
+                        <label class="form-check-label" for="layout-direction-ltr">LTR</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="layout-direction"
+                            id="layout-direction-rtl" value="rtl">
+                        <label class="form-check-label" for="layout-direction-rtl">RTL</label>
+                    </div>
+
+                </div>
+
+            </div> <!-- end slimscroll-menu-->
+        </div>
+        <div class="position-fixed end-0 bottom-0" style="width:400px ;">
+            {% for msg in messages %}
+            {% if msg.level == 30 %}
+            <div class=" toast align-items-center text-white bg-danger border-0" style="display: block; margin: 15px;"  role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                       {{msg}}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            {% else %}
+            <div class=" toast align-items-center text-white bg-success border-0" style="display: block; margin: 15px;"  role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        {{msg}}
+                    </div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <!-- /Right-bar -->
+            </div>
+        <!-- /Right-bar -->
+
+        <!-- Right bar overlay-->
+        <div class="rightbar-overlay"></div>
+
+        <!-- JAVASCRIPT -->
+        <script src="{% static 'assets/libs/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/libs/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'assets/libs/metismenu/metisMenu.min.js' %}"></script>
+        <script src="{% static 'assets/libs/simplebar/simplebar.min.js' %}"></script>
+        <script src="{% static 'assets/libs/node-waves/waves.min.js' %}"></script>
+        <script src="{% static 'assets/libs/feather-icons/feather.min.js' %}"></script>
+        <!-- pace js -->
+        <script src="{% static 'assets/libs/pace-js/pace.min.js' %}"></script>
+        <script src="{% static 'assets/libs/apexcharts/apexcharts.min.js' %}"></script>
+        <script src="{% static 'assets/js/app.js' %}"></script>
+        <!-- Plugins js-->
+        <script src="{% static 'assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js' %}"></script>
+        <script src="{% static 'assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js' %}"></script>
+        <!-- dashboard init -->
+        <script src="{% static 'assets/js/pages/dashboard.init.js' %}"></script>
+        <script src="{% static 'assets/js/pages/datatables.init.js' %}"></script>  
+        <!-- Responsive examples -->
+        <script src="{% static 'assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js' %}"></script>  
+        <script src="{% static 'assets/libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+        <!-- Buttons examples -->
+        <script src="{% static 'assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js' %}"></script>
+        <script src="{% static 'assets/libs/jszip/jszip.min.js' %}"></script>
+        <script src="{% static 'assets/libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static 'assets/libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static 'assets/libs/datatables.net-buttons/js/buttons.colVis.min.js' %}"></script>
+        <script src="{% static 'assets/js/pages/form-advanced.init.js' %}"></script>
+        
+        <!-- choices js -->
+        <script src="{% static 'assets/libs/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+
+        <!-- color picker js -->
+        <script src="{% static 'assets/libs/%40simonwep/pickr/pickr.min.js' %}"></script>
+        <script src="{% static 'assets/libs/%40simonwep/pickr/pickr.es5.min.js' %}"></script>
+
+        <!-- datepicker js -->
+        <script src="{% static 'assets/libs/flatpickr/flatpickr.min.js' %}"></script>
+
+
+
+
+    </body>
+
+<!-- Mirrored from themesbrand.com/minia/layouts/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 24 Aug 2022 06:28:52 GMT -->
+</html>
+
+
+
+</html> 

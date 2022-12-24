@@ -1,0 +1,32 @@
+{% extends 'boss/base.html' %}
+{% block title %}Oylik berish{% endblock title %}
+
+{% block content %}
+<style>
+      .card{
+            border:none;
+            width: 70%;
+      }
+</style>
+      <h5>Oylik berish</h5>
+      <div style="padding: 10px;" class="card shadow  " >
+            <h6  >
+                  Teacher:
+                  {{teacher.first_name}}
+                  {{teacher.last_name}} |
+                  Hisobida: {{teacher.wallet}} so'm |
+                  Max: {{teacher.wallet}} so'm
+
+            </h6>
+            <h6>Forma</h6>
+            <form method="post"> {% csrf_token %} 
+            <div  class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Ish haqi miqdori (so'mda)</label>
+                  <input required placeholder="2000000" max="{{teacher.wallet}}"  type="number" name="summ" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <button type="submit" class="btn btn-primary" > Tasdiqlash </button>
+            <a href="{% url 'index' %}" class="btn btn-danger" > Bekor qilish </a>
+            </form>
+      </div>
+
+{% endblock content %}

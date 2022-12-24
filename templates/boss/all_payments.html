@@ -1,0 +1,89 @@
+{% extends 'boss/base.html' %}
+{% block title %} Barcha to'lovlar {% endblock title %}
+
+{% block content %}
+
+<div class="col-12">
+      <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+          <h4 class="mb-sm-0 font-size-18">Barcha to'lovlar </h4>
+
+          <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item"><a href="{% url 'income' %}">Kirim</a></li>
+                  <li class="breadcrumb-item active">Barcha to'lovlar</li>
+              </ol>
+          </div>
+      </div>
+  </div>
+
+
+<div class="row">
+      <div class="col-12">
+            <div  class=" card  col-12">
+                  <div class="container" >
+                        <br>
+                  <form method="post"  >{% csrf_token %}
+                          
+                        <div class="row" >
+                          <div class="col-5" >
+                            <label for="example-date-input" class="form-label">Boshlanish</label>
+                            <input class="form-control" name="start" type="date" value="{{start}}" id="example-date-input">
+                          </div>
+                          <div class="col-5" >
+                            <label for="example-date-input" class="form-label">Tugash</label>
+                            <input class="form-control" name="end" type="date" value="{{end}}" id="example-date-input">
+                          </div>
+                          <div class="col-2" ><button style='margin-top:27px' type="submit" class="btn btn-primary" >Submit</button></div>
+
+                        </div>
+                  
+                     
+                 
+                      
+                    </form>
+                    <br>
+                  </div>
+                  
+            </div>
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="card-title">Barcha to'lovlar</h4>
+                  
+              </div>
+              <div class="card-body">
+                  <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ism, Familiya</th>
+                            <th scope="col">Telefon raqam</th>
+                            <th scope="col">To'lov summasi</th>
+                            <th scope="col">Sana</th>
+                            
+                            
+                          </tr>
+                        </thead>
+                        <tbody>
+                              {% for i in payments %}
+                          <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{i.student.full_name}}</td>
+                            <td>{{i.student.phone_number}}</td>
+                            <td>{{i.summ}}</td>
+                            <td>{{i.date}}</td>
+                            
+                          </tr>
+                          {% endfor %}
+                          
+                        </tbody>
+                  </table>    
+              </div>
+
+
+              
+          </div>
+          <!-- end cardaa -->
+      </div> <!-- end col -->
+  </div> <!-- end row -->
+
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style  type="text/css">
+      .header{
+            margin-left: 15px;
+      }
+     
+      table td.absent{
+            background-color: rgb(49, 49, 49);
+      }
+      .vertical{
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+      }
+</style>
+  <!-- start page title -->
+  <div class="row">
+      <div class="col-12">
+          <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+              <h4 class="mb-sm-0 font-size-18">Davomatni ko'rish</h4>
+  
+              <div class="page-title-right">
+                  <ol class="breadcrumb m-0">
+                      <li class="breadcrumb-item"><a href="{% url 'teacher-dashboard' %}">Dashboard</a></li>
+                      <li class="breadcrumb-item active">Davomat </li>
+                  </ol>
+              </div>
+          </div>
+      </div>
+    </div>
+<div class=" ">
+      <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">{{course.name}}</h4>
+                    </div>
+                    <div class="card-body">
+      <table class="table  table-hover table-bordered ">
+            <thead>
+                  <tr>
+                    <th style="width: 3%;"   scope="col">#</th>
+                    <th scope="col">Full Name</th>
+                    {% for i in students %}
+                    
+                       {% if forloop.counter < 2 %}
+                       {{i.attendances.date}}
+                       {% for a  in i.attendances %}
+                      <td class="vertical" style="width: 3%;" >{{a.date}}</td>
+                      {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+
+                    
+                  </tr>
+                </thead>
+           
+                  <tbody>
+                  {% for i in students %}
+                    
+                    <tr>
+                      <th style="width: 3%;"  scope="row">{{forloop.counter}}</th>
+                      <td>{{i.full_name}}</td>
+                      {% for a in i.attendances %}
+                      
+                      {% if a.present == False %}
+                      <td style="width: 3%;" class="absent" ></td>
+                      {% elif  a.present == True %}
+                      <td  style="width: 3%;" > + </td>
+                      {% else %}
+                      <td  style="width: 3%;" >  </td>
+                      {% endif %}
+
+                      {% endfor %}
+                    </tr>
+                    
+                    {% endfor %}
+                  </tbody>
+            
+      </table>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
